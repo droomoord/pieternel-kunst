@@ -23,7 +23,7 @@ export async function fetchPageTitles() {
   if (data) {
     const json = await data.json();
     return {
-      data: json.result.concat({ title: "Gallerij", slug: "gallerij" }),
+      data: json.result,
     };
   } else {
     return { data: { error: "there was an error" } };

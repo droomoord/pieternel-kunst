@@ -20,6 +20,12 @@ export async function getServerSideProps() {
   }
 
   return {
-    props: { blogPosts: blogPosts.data, pageTitles: pageTitles.data },
+    props: {
+      blogPosts: blogPosts.data,
+      pageTitles: pageTitles.data.concat({
+        title: "Gallerij",
+        slug: "gallerij",
+      }),
+    },
   };
 }

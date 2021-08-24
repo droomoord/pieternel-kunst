@@ -40,13 +40,20 @@ export async function getStaticProps(context) {
     };
   }
   return {
-    props: { page: page.data[0], pageTitles: pageTitles.data },
+    props: {
+      page: page.data[0],
+      pageTitles: pageTitles.data.concat({
+        title: "Gallerij",
+        slug: "gallerij",
+      }),
+    },
     revalidate: 60,
   };
 }
 
 export async function getStaticPaths() {
   const { data } = await fetchPageTitles();
+
   return {
     paths: data.map((page) => {
       return {
