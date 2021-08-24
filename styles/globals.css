@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,300;1,700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+@media only screen and (min-width: 600px) {
+  .block-content figure {
+    @apply w-3/4 self-center;
+  }
+  .block-content figure img {
+    @apply m-auto;
+  }
+}
+
+.block-content h1,
+.block-content h2,
+.block-content h3,
+.block-content h4,
+.block-content h5,
+.block-content h6 {
+  @apply font-bold text-center;
+}
+
+.block-content h1 {
+  @apply text-4xl;
+}
+
+.block-content h2 {
+  @apply text-3xl;
+}
+
+.block-content h3 {
+  @apply text-2xl;
+}
+
+.block-content h4 {
+  @apply text-xl;
+}
+
+.block-content h5 {
+  @apply text-lg;
+}
+
+.block-content h6 {
+  @apply text-base;
+}
+
+.block-content p {
+  @apply w-full lg:w-1/2 self-center;
+}
+
+.block-content a {
+  @apply text-gray-800 underline;
+}
+/*# sourceMappingURL=globals.css.map */
