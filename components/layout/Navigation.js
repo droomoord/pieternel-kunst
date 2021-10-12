@@ -28,13 +28,13 @@ const Navigation = ({ pageTitles }) => {
               </span>
               <div className="w-full flex justify-between items-end">
                 <span className="text-white">de</span>
-                <span className="text-white text-5xl">Garage</span>
+                <span className="text-white text-3xl">Garage</span>
               </div>
             </h1>
           </div>
 
           <button
-            className="z-20 border-2 border-black rounded p-1.5 bg-gray-100 m-2 w-14 h-14 flex justify-center items-center"
+            className="z-20 border-2 border-black rounded p-1.5 bg-white m-2 w-12 h-12 flex justify-center items-center"
             onClick={clickHandler}
           >
             {drawer ? <GrClose size="2em"></GrClose> : <FaBars size="2em" />}

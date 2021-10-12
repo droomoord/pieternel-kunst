@@ -3,7 +3,7 @@
   font-family: "Lato", sans-serif;
 }
 .navigation h1 > span {
-  letter-spacing: 0.4em;
+  letter-spacing: 0.15em;
 }
 .logo {
   transform: translate(2px, -4px);

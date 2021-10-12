@@ -6,7 +6,7 @@ import { AiFillFacebook } from "react-icons/ai";
 import { AiFillLinkedin } from "react-icons/ai";
 import { AiFillInstagram } from "react-icons/ai";
 
-const Navbar = ({ navItems, clicked }) => {
+const Navbar = ({ navItems }) => {
   const router = useRouter();
   const page = router.asPath;
 
