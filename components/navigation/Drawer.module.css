@@ -1,0 +1,10 @@
+.drawer {
+  background-color: #020310;
+  /* letter-spacing: 0.3em; */
+}
+.drawer a {
+  font-size: 0.8em;
+}
+.active {
+  text-decoration-thickness: 5px;
+}

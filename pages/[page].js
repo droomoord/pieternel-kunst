@@ -1,8 +1,28 @@
 import { fetchPage, fetchPageTitles } from "../functions";
 import Page from "../components/layout/Page";
+import Head from "next/head";
 
 export default function dynamicPage({ page, pageTitles }) {
-  return <Page page={page} pageTitles={pageTitles} />;
+  const metatags = page.metatags
+    ? page.metatags.map((metatag) => {
+        return (
+          <meta
+            name={metatag.name}
+            content={metatag.content}
+            key={metatag._key}
+          />
+        );
+      })
+    : null;
+  return (
+    <>
+      <Head>
+        <title>de Garage - {page.title}</title>
+        {metatags}
+      </Head>
+      <Page page={page} pageTitles={pageTitles} />
+    </>
+  );
 }
 
 // export async function getServerSideProps(context) {
@@ -42,10 +62,13 @@ export async function getStaticProps(context) {
   return {
     props: {
       page: page.data[0],
-      pageTitles: pageTitles.data.concat({
-        title: "Gallerij",
-        slug: "gallerij",
-      }),
+      pageTitles: [
+        {
+          title: "Exposities",
+          slug: "",
+        },
+        ...pageTitles.data,
+      ],
     },
     revalidate: 60,
   };

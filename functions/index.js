@@ -18,12 +18,16 @@ export async function fetchPage(page) {
 }
 
 export async function fetchPageTitles() {
-  const query = encodeURIComponent("*[_type == 'page']{title, slug}");
+  const query = encodeURIComponent("*[_type == 'page']{title, slug, volgorde}");
   const data = await fetch(urlString + query);
   if (data) {
     const json = await data.json();
+    console.log(json);
+    const orderedPages = json.result.sort((a, b) => {
+      return a.volgorde - b.volgorde;
+    });
     return {
-      data: json.result,
+      data: orderedPages,
     };
   } else {
     return { data: { error: "there was an error" } };
@@ -31,7 +35,7 @@ export async function fetchPageTitles() {
 }
 
 export async function fetchBlogPosts() {
-  const query = encodeURIComponent("*[_type == 'gallerij']");
+  const query = encodeURIComponent("*[_type == 'exposities']");
   const data = await fetch(urlString + query);
   if (data) {
     const json = await data.json();

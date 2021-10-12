@@ -1,8 +1,16 @@
 import { fetchPageTitles, fetchBlogPosts } from "../functions";
 import Blog from "../components/layout/Blog";
+import Head from "next/head";
 
 export default function dynamicPage({ blogPosts, pageTitles }) {
-  return <Blog blogPosts={blogPosts} pageTitles={pageTitles} />;
+  return (
+    <>
+      <Head>
+        <title>de Garage - Exposities</title>
+      </Head>
+      <Blog blogPosts={blogPosts} pageTitles={pageTitles} />
+    </>
+  );
 }
 
 export async function getServerSideProps() {
@@ -23,8 +31,8 @@ export async function getServerSideProps() {
     props: {
       blogPosts: blogPosts.data,
       pageTitles: pageTitles.data.concat({
-        title: "Gallerij",
-        slug: "gallerij",
+        title: "Exposities",
+        slug: "exposities",
       }),
     },
   };

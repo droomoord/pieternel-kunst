@@ -2,21 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,300;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,400;0,700;1,400;1,700&family=Abril+Fatface&display=swap");
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
-@media only screen and (min-width: 600px) {
-  .block-content {
-    figure {
-      @apply w-3/4 self-center;
-    }
-    figure img {
-      @apply m-auto;
-    }
-  }
+:root {
+  --primary: #ffdddd;
+  --secondary: #c2e8ed;
+}
+
+// @media only screen and (min-width: 600px) {
+//   .block-content {
+//     figure {
+//       @apply w-3/4 self-center;
+//     }
+//     figure img {
+//       @apply m-auto;
+//     }
+//   }
+// }
+// @media only screen and (max-width: 700px) {
+//   .images {
+//     column-count: 1 !important;
+//   }
+// }
+
+.blog h1 {
+  text-shadow: 1px 1px 5px black;
 }
 
 .block-content {
@@ -50,8 +64,7 @@ body {
   p {
     @apply w-full lg:w-1/2 self-center;
   }
-
-  a {
-    @apply text-gray-800 underline;
-  }
+}
+a {
+  @apply underline;
 }

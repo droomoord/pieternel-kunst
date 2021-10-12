@@ -1,17 +1,21 @@
-import { fetchPage, fetchPageTitles } from "../functions";
-import Page from "../components/layout/Page";
+import { fetchPageTitles, fetchBlogPosts } from "../functions";
+import Blog from "../components/layout/Blog";
+import Head from "next/head";
 
-export default function dynamicPage({ page, pageTitles }) {
+export default function dynamicPage({ blogPosts, pageTitles }) {
   return (
-    <div>
-      <Page page={page} pageTitles={pageTitles} />
-    </div>
+    <>
+      <Head>
+        <title>de Garage - Exposities</title>
+      </Head>
+      <Blog blogPosts={blogPosts} pageTitles={pageTitles} />
+    </>
   );
 }
 
 export async function getServerSideProps() {
-  const page = await fetchPage("home");
-  if (!page.data || page.data.length < 1) {
+  const blogPosts = await fetchBlogPosts();
+  if (!blogPosts.data || blogPosts.data.length < 1) {
     return {
       notFound: true,
     };
@@ -25,14 +29,53 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      page: page.data[0],
-      pageTitles: pageTitles.data.concat({
-        title: "Gallerij",
-        slug: "gallerij",
-      }),
+      blogPosts: blogPosts.data,
+      pageTitles: [
+        {
+          title: "Exposities",
+          slug: "",
+        },
+        ...pageTitles.data,
+      ],
     },
   };
 }
+
+// import { fetchPage, fetchPageTitles } from "../functions";
+// import Page from "../components/layout/Page";
+
+// export default function dynamicPage({ page, pageTitles }) {
+//   return (
+//     <div>
+//       <Page page={page} pageTitles={pageTitles} />
+//     </div>
+//   );
+// }
+
+// export async function getServerSideProps() {
+//   const page = await fetchPage("home");
+//   if (!page.data || page.data.length < 1) {
+//     return {
+//       notFound: true,
+//     };
+//   }
+//   const pageTitles = await fetchPageTitles();
+//   if (!pageTitles.data || pageTitles.data.length < 1) {
+//     return {
+//       notFound: true,
+//     };
+//   }
+
+//   return {
+//     props: {
+//       page: page.data[0],
+//       pageTitles: pageTitles.data.concat({
+//         title: "Exposities",
+//         slug: "exposities",
+//       }),
+//     },
+//   };
+// }
 
 // export async function getStaticProps(context) {
 //   const { data } = await fetchPage('home');

@@ -1,10 +1,87 @@
+import BlockContent from "@sanity/block-content-to-react";
 import Navigation from "../layout/Navigation";
-import { useRouter } from "next/router";
-import Head from "next/head";
 import imageUrlBuilder from "@sanity/image-url";
-import Image from "next/image";
+import InfoDrawer from "./InfoDrawer";
+import Filter from "../Filter/Filter";
+
+import { useEffect, useState } from "react";
+
+import classes from "./Style.module.css";
 
 const Blog = ({ blogPosts, pageTitles }) => {
+  const [filteredBlogposts, setFilteredBlogposts] = useState(blogPosts);
+  const [filterState, setFilterState] = useState("alle");
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const today = new Date();
+    switch (filterState) {
+      case "alle":
+        setFilteredBlogposts([
+          ...blogPosts
+            .filter((post) => {
+              return today <= new Date(post.tot);
+            })
+            .sort((a, b) => {
+              return new Date(a.van) - new Date(b.van);
+            }),
+          ...blogPosts
+            .filter((post) => {
+              return today >= new Date(post.tot);
+            })
+            .sort((a, b) => {
+              return new Date(b.van) - new Date(a.van);
+            }),
+        ]);
+
+        break;
+      case "toekomst":
+        setFilteredBlogposts([
+          ...blogPosts
+            .filter((post) => {
+              return today <= new Date(post.tot);
+            })
+            .sort((a, b) => {
+              return new Date(a.van) - new Date(b.van);
+            }),
+        ]);
+
+        break;
+      case "verleden":
+        setFilteredBlogposts([
+          ...blogPosts
+            .filter((post) => {
+              return today >= new Date(post.tot);
+            })
+            .sort((a, b) => {
+              return new Date(b.van) - new Date(a.van);
+            }),
+        ]);
+
+        break;
+      default:
+        break;
+    }
+  }, [filterState]);
+
+  useEffect(() => {
+    const blogPosts = document.querySelectorAll(".post");
+
+    blogPosts.forEach((post) => {
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting)
+            document
+              .querySelector(`[data-id="${entry.target.dataset.id}"]`)
+              .querySelectorAll("img")
+              .forEach((image) => {
+                image.setAttribute("src", image.dataset.src);
+              });
+        });
+      });
+      observer.observe(post);
+    });
+  }, [filteredBlogposts]);
+
   const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
   const dataset = process.env.NEXT_PUBLIC_DATASET;
 
@@ -20,68 +97,109 @@ const Blog = ({ blogPosts, pageTitles }) => {
   function urlFor(source) {
     return builder.image(source);
   }
-
   const builder = imageUrlBuilder(client);
 
-  const pageRender = (
-    <section className="blog px-5 pt-28 md:px-10 md:flex md:flex-col md:items-center">
-      {blogPosts.map((post) => {
-        const imgs = post.images.map((image) => {
-          return {
-            src: urlFor(image).url(),
-            key: image._key,
-          };
-        });
-        console.log(post);
+  const months = [
+    "jan",
+    "feb",
+    "mrt",
+    "apr",
+    "mei",
+    "jun",
+    "jul",
+    "aug",
+    "sep",
+    "okt",
+    "nov",
+    "nov",
+  ];
 
-        return (
-          <div
-            key={post._id}
-            className=" flex flex-col items-center md:block md:p-10 lg:px-52"
-          >
-            <h1 className="text-4xl text-center m-5">
-              {post.title.charAt(0).toUpperCase() + post.title.slice(1)}
-            </h1>
-            {post.date && (
-              <small className="text-right block  font-bold">{post.date}</small>
-            )}
-            {post.description ? (
-              <p className="text-center">{post.description}</p>
-            ) : null}
+  const changed = function (e) {
+    setFilterState(e.target.value);
+  };
+
+  const pageRender = (
+    <>
+      <InfoDrawer filter changed={changed} />
+      <div className={classes.mobilefilter}>
+        <Filter changed={changed} />
+      </div>
+      <section className={classes.wrapper2}>
+        {filteredBlogposts.map((post, index) => {
+          const from = new Date(post.van);
+          const to = new Date(post.tot);
+          const imgs = post.images.map((image) => {
+            return {
+              src: urlFor(image).url(),
+              key: image._key,
+            };
+          });
+          return (
             <div
-              className={`p-10 flex flex-col gap-5 md:grid md:p-0 md:grid-cols-${
-                imgs.length < 4 ? imgs.length : 4
-              }`}
+              key={post._id}
+              data-id={index}
+              className={`post ${classes.post}`}
             >
-              {imgs.map((image) => {
-                return (
-                  <div
-                    key={image.key}
-                    className="flex justify-center cursor-pointer"
-                  >
-                    <Image
+              <h1 className={classes.title}>
+                {post.title.charAt(0).toUpperCase() + post.title.slice(1)}
+              </h1>
+              <div className={classes.date}>
+                {post.van ? (
+                  <span>
+                    <div>
+                      {post.van && (
+                        <div>
+                          <span className={classes.big}>{from.getDate()}</span>{" "}
+                          <span>{months[from.getMonth()]}</span>
+                        </div>
+                      )}
+                      <span> tm </span>
+                      {post.tot && (
+                        <div>
+                          <span className={classes.big}>{to.getDate()}</span>{" "}
+                          <span>{months[to.getMonth()]}</span>{" "}
+                          <div>{to.getFullYear()}</div>
+                        </div>
+                      )}
+                    </div>
+                  </span>
+                ) : null}
+              </div>
+              <div>
+                {post.description ? (
+                  <>
+                    <BlockContent
+                      className={classes.description}
+                      blocks={post.description}
+                    ></BlockContent>
+                  </>
+                ) : null}
+              </div>
+              <div className={classes.images}>
+                {imgs.map((image) => {
+                  return (
+                    <img
+                      key={image.key}
+                      data-src={image.src}
                       onClick={() => window.open(image.src, "_blank").focus()}
-                      src={image.src}
-                      width={400}
-                      height={400}
                     />
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        );
-      })}
-    </section>
+          );
+        })}
+      </section>
+    </>
   );
+
+  // LOADER:
+  // <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-12 w-12 absolute top-1/2 left-1/2 z-0"></div>
 
   return (
     <>
-      <Head>
-        <title>Boiler Plate - Blog</title>
-      </Head>
       <Navigation pageTitles={pageTitles} />
-      {pageRender}
+      <div className={classes.wrapper}>{pageRender}</div>
     </>
   );
 };

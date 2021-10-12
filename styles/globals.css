@@ -1,18 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,300;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,400;0,700;1,400;1,700&family=Abril+Fatface&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
-@media only screen and (min-width: 600px) {
-  .block-content figure {
-    @apply w-3/4 self-center;
-  }
-  .block-content figure img {
-    @apply m-auto;
-  }
+:root {
+  --primary: #ffdddd;
+  --secondary: #c2e8ed;
+}
+
+.blog h1 {
+  text-shadow: 1px 1px 5px black;
 }
 
 .block-content h1,
@@ -52,7 +52,7 @@ body {
   @apply w-full lg:w-1/2 self-center;
 }
 
-.block-content a {
-  @apply text-gray-800 underline;
+a {
+  @apply underline;
 }
 /*# sourceMappingURL=globals.css.map */

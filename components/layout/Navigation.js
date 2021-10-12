@@ -2,6 +2,7 @@ import Navbar from "../navigation/Navbar";
 import Drawer from "../navigation/Drawer";
 import { FaBars } from "react-icons/fa";
 import { GrClose } from "react-icons/gr";
+import classes from "./Navigation.module.css";
 
 import { useState } from "react";
 
@@ -15,30 +16,42 @@ const Navigation = ({ pageTitles }) => {
     setDrawer(!drawer);
   }
   return (
-    <>
-      <nav>
-        <div className="block md:hidden">
-          <div className="z-20 border-b-2 w-screen h-20 flex justify-end items-center fixed bg-white">
-            <button
-              className="z-20 border-2 border-black rounded p-1.5 bg-gray-100 m-2 w-14 h-14 flex justify-center items-center"
-              onClick={clickHandler}
-            >
-              {drawer ? <GrClose size="2em"></GrClose> : <FaBars size="2em" />}
-            </button>
+    <header>
+      <div className="block md:hidden">
+        <div
+          className={`${classes.navigation} z-20 w-screen h-20 flex justify-between  items-center fixed bg-transparent`}
+        >
+          <div className={`${classes.logo} ml-2`}>
+            <h1>
+              <span className="text-primary italic text-base relative top-2">
+                Ateliergalerie
+              </span>
+              <div className="w-full flex justify-between items-end">
+                <span className="text-white">de</span>
+                <span className="text-white text-5xl">Garage</span>
+              </div>
+            </h1>
           </div>
-          {drawer && (
-            <Drawer
-              drawerItems={pageTitles}
-              clicked={clicked}
-              closeDrawer={clickHandler}
-            />
-          )}
+
+          <button
+            className="z-20 border-2 border-black rounded p-1.5 bg-gray-100 m-2 w-14 h-14 flex justify-center items-center"
+            onClick={clickHandler}
+          >
+            {drawer ? <GrClose size="2em"></GrClose> : <FaBars size="2em" />}
+          </button>
         </div>
-        <div className="hidden md:block">
-          <Navbar navItems={pageTitles} clicked={clicked} />
-        </div>
+        {drawer && (
+          <Drawer
+            drawerItems={pageTitles}
+            clicked={clicked}
+            closeDrawer={clickHandler}
+          />
+        )}
+      </div>
+      <nav className="hidden md:block">
+        <Navbar navItems={pageTitles} clicked={clicked} />
       </nav>
-    </>
+    </header>
   );
 };
 

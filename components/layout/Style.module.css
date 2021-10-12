@@ -1,0 +1,107 @@
+.wrapper {
+  background-color: var(--secondary);
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  min-height: 100vh;
+}
+.wrapper2 {
+  grid-column-start: 1;
+  grid-column-end: 13;
+  grid-row-start: 1;
+  background-color: white;
+  margin-top: 140px;
+  padding: 15px;
+  border-radius: 10px;
+}
+.mobilefilter {
+  position: absolute;
+  top: 85px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.title {
+  text-align: center;
+  font-size: 1.7em;
+  font-family: Lato, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.297);
+}
+.description {
+  color: #1f1f1f;
+}
+.post {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  margin-bottom: 2em;
+  position: relative;
+}
+.date {
+  color: black;
+  text-align: center;
+  background-color: var(--primary);
+  padding: 0.5em 0;
+}
+.images {
+  column-count: 1;
+}
+.images img {
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 1em;
+  cursor: pointer;
+}
+.date * {
+  display: inline;
+}
+
+@media only screen and (min-width: 560px) {
+  .images {
+    column-count: 2;
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  .wrapper2 {
+    grid-column-start: 2;
+    grid-column-end: 9;
+    padding: 50px 70px;
+  }
+  .mobilefilter {
+    display: none;
+  }
+  .post {
+    margin-bottom: 8em;
+  }
+  .title {
+    text-align: left;
+  }
+  .images {
+    column-count: 1;
+  }
+  .big {
+    font-size: 2em;
+  }
+  .date div {
+    display: block;
+  }
+  .date {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateX(120%);
+    font-family: "Abril Fatface", cursive;
+    padding: 1em 1.5em;
+    line-height: 1.7em;
+    border-radius: 5%;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.249);
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .images {
+    column-count: 3;
+  }
+}

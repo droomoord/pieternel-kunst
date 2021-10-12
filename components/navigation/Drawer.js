@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import classes from "./Drawer.module.css";
 
 const Drawer = ({ drawerItems, closeDrawer }) => {
   const [mounted, setMounted] = useState(false);
@@ -11,24 +12,30 @@ const Drawer = ({ drawerItems, closeDrawer }) => {
   }, []);
   return (
     <div
-      className={`h-screen z-10 w-screen bg-white m-0 pt-40 flex flex-col justify-start items-center gap-10 text-2xl fixed opacity-${
+      className={`${
+        classes.drawer
+      } h-screen z-10 w-screen m-0 pt-20 flex flex-col justify-center items-center gap-5 text-2xl fixed opacity-${
         mounted ? "1" : "0"
-      } transition-opacity duration-300`}
+      } transition-opacity duration-500`}
     >
       {drawerItems.map((item) => {
-        const active =
-          (page === "/" && item.slug === "home") || "/" + item.slug === page;
+        const active = "/" + item.slug === page;
         return active ? (
           <a
             onClick={closeDrawer}
-            className="font-bold underline cursor-pointer"
+            className={`${classes.active} text-xs font-bold text-primary uppercase underline  relative py-3`}
             key={item.slug}
           >
             {item.title}
           </a>
         ) : (
           <Link key={item.slug} href={"/" + item.slug}>
-            <a onClick={closeDrawer}>{item.title}</a>
+            <a
+              onClick={closeDrawer}
+              className={`${classes.link} text-xs font-bold text-white uppercase no-underline relative py-3`}
+            >
+              {item.title}
+            </a>
           </Link>
         );
       })}
