@@ -15,6 +15,18 @@ body {
   text-shadow: 1px 1px 5px black;
 }
 
+.block-content {
+  line-height: 1.7;
+}
+
+.block-content > * {
+  margin-bottom: 1em;
+}
+
+.block-content li {
+  list-style: circle;
+}
+
 .block-content h1,
 .block-content h2,
 .block-content h3,
@@ -49,7 +61,7 @@ body {
 }
 
 .block-content p {
-  @apply w-full lg:w-1/2 self-center;
+  @apply w-full;
 }
 
 a {

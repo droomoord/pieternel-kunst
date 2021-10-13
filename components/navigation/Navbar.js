@@ -53,9 +53,27 @@ const Navbar = ({ navItems }) => {
         })}
       </ul>
       <div className="social col-start-11 col-end-13 flex justify-end items-center  lg:gap-2 pr-5 lg:pr-8">
-        <AiFillFacebook className="text-4xl text-blue-700" />
-        <AiFillInstagram className="text-4xl text-pink-500" />
-        <AiFillLinkedin className="text-4xl text-blue-900" />
+        <a
+          href="https://www.facebook.com/pieternel.geurtz"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <AiFillFacebook className="text-4xl text-blue-700" />
+        </a>
+        <a
+          href="https://www.instagram.com/pieternelgeurtz/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <AiFillInstagram className="text-4xl text-pink-500" />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/pieternel-geurtz-691aa41a/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <AiFillLinkedin className="text-4xl text-blue-900" />
+        </a>
       </div>
     </div>
   );

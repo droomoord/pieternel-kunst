@@ -29,6 +29,7 @@ const Page = ({ page, pageTitles, startLoading }) => {
       <InfoDrawer />
       <section className={classes.wrapper2}>
         <BlockContent
+          className="block-content"
           blocks={page.body}
           projectId={projectId}
           dataset={dataset}
