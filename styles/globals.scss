@@ -29,12 +29,9 @@ body {
 //   }
 // }
 
-.blog h1 {
-  text-shadow: 1px 1px 5px black;
-}
-
 .block-content {
   line-height: 1.7;
+  color: rgb(24, 24, 24);
   > * {
     margin-bottom: 1em;
   }
@@ -48,6 +45,7 @@ body {
   h5,
   h6 {
     @apply font-bold text-center;
+    color: black;
   }
   h1 {
     @apply text-4xl;

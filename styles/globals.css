@@ -11,12 +11,9 @@ body {
   --secondary: #c2e8ed;
 }
 
-.blog h1 {
-  text-shadow: 1px 1px 5px black;
-}
-
 .block-content {
   line-height: 1.7;
+  color: #181818;
 }
 
 .block-content > * {
@@ -34,6 +31,7 @@ body {
 .block-content h5,
 .block-content h6 {
   @apply font-bold text-center;
+  color: black;
 }
 
 .block-content h1 {
