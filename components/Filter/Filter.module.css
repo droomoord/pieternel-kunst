@@ -7,6 +7,7 @@
   padding: 0 1em;
   gap: 1em;
   width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.205);
 }
 .select {
   border-radius: 10px;

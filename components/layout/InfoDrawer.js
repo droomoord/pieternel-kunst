@@ -25,9 +25,15 @@ const infoDrawer = ({ filter, changed }) => {
           </address>
         </div>
         <p className={classes.info}>
-          Algemene info : Hier kan je misschien wat informatie plaatsen over de
-          bereikbaarheid ofzo. Of over de tijden dat je open bent. Of dat men
-          even moet laten weten wanneer ze langskomen? Bedenk maar wat....
+          De Garage bevindt op een locatie die supergoed bereikbaar is,
+          tegenover de bushalte van Den Burg en aan een parkeerplaats. Op
+          woensdagmiddag tussen 2 en 5 uur is de galerie open. In de maanden
+          juli en augustus al vanaf 11 uur want dan is in het centrum tevens
+          zomermarkt. Op afspraak via{" "}
+          <a href="mailto:pieternelgeurtz@gmail.com" target="_blank">
+            pieternelgeurtz@gmail.com
+          </a>{" "}
+          ben je ook van harte welkom.
         </p>
       </div>
     </div>

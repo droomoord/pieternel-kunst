@@ -69,6 +69,10 @@ body {
   p {
     @apply w-full;
   }
+
+  img {
+    width: 100%;
+  }
 }
 a {
   @apply underline;
