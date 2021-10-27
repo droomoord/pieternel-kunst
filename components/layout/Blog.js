@@ -3,6 +3,7 @@ import Navigation from "../layout/Navigation";
 import imageUrlBuilder from "@sanity/image-url";
 import InfoDrawer from "./InfoDrawer";
 import Filter from "../Filter/Filter";
+import ImageFull from "../util/ImageFull";
 
 import { useEffect, useState } from "react";
 
@@ -11,6 +12,8 @@ import classes from "./Style.module.css";
 const Blog = ({ blogPosts, pageTitles }) => {
   const [filteredBlogposts, setFilteredBlogposts] = useState(blogPosts);
   const [filterState, setFilterState] = useState("alle");
+  const [showFullImage, setShowFullImage] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
   useEffect(() => {
     window.scrollTo(0, 0);
     const today = new Date();
@@ -118,6 +121,12 @@ const Blog = ({ blogPosts, pageTitles }) => {
     setFilterState(e.target.value);
   };
 
+  const showImage = function (src) {
+    window.history.forward();
+    setImageUrl(src);
+    setShowFullImage(true);
+  };
+
   const pageRender = (
     <>
       <InfoDrawer filter changed={changed} />
@@ -181,7 +190,8 @@ const Blog = ({ blogPosts, pageTitles }) => {
                     <img
                       key={image.key}
                       data-src={image.src}
-                      onClick={() => window.open(image.src, "_blank").focus()}
+                      onClick={() => showImage(image.src)}
+                      // onClick={() => window.open(image.src, "_blank").focus()}
                     />
                   );
                 })}
@@ -200,6 +210,9 @@ const Blog = ({ blogPosts, pageTitles }) => {
     <>
       <Navigation pageTitles={pageTitles} />
       <div className={classes.wrapper}>{pageRender}</div>
+      {showFullImage && (
+        <ImageFull url={imageUrl} close={() => setShowFullImage(false)} />
+      )}
     </>
   );
 };
