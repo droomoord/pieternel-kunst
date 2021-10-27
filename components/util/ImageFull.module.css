@@ -13,19 +13,33 @@
   animation-duration: 0.2s;
   animation-fill-mode: forwards;
 }
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 .wrapper img {
   width: max(60%, 500px);
   max-height: 95%;
   position: relative;
 }
+.arrow {
+  position: absolute;
+  bottom: 10%;
+  width: 40px;
+  height: 40px;
+  z-index: 400;
+  border: solid rgba(255, 255, 255, 0.61);
+  border-width: 0 10px 10px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: translateY(-50%);
+}
+
+.left {
+  left: 10%;
+  transform: rotate(135deg);
+}
+.right {
+  right: 10%;
+  transform: rotate(-45deg);
+}
+
 .x {
   position: absolute;
   top: 20px;
@@ -52,9 +66,25 @@
     cursor: pointer;
   }
   .wrapper img {
-    cursor: initial;
   }
   .x {
     display: none;
+  }
+  .arrow {
+    width: 100px;
+    height: 100px;
+    top: 50%;
+  }
+  .arrow:hover {
+    border-color: rgb(255, 255, 255);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

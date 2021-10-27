@@ -14,6 +14,7 @@ const Blog = ({ blogPosts, pageTitles }) => {
   const [filterState, setFilterState] = useState("alle");
   const [showFullImage, setShowFullImage] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
+  const [imageArray, setImageArray] = useState([]);
   useEffect(() => {
     window.scrollTo(0, 0);
     const today = new Date();
@@ -121,10 +122,19 @@ const Blog = ({ blogPosts, pageTitles }) => {
     setFilterState(e.target.value);
   };
 
-  const showImage = function (src) {
-    window.history.forward();
+  const showImage = function (src, array) {
     setImageUrl(src);
+    setImageArray(array);
     setShowFullImage(true);
+  };
+
+  const changeImage = function (direction) {
+    const currentIndex = imageArray.indexOf(imageUrl);
+    if (
+      (currentIndex !== 0 && direction === -1) ||
+      (currentIndex !== imageArray.length - 1 && direction === 1)
+    )
+      setImageUrl(imageArray[currentIndex + direction]);
   };
 
   const pageRender = (
@@ -190,7 +200,12 @@ const Blog = ({ blogPosts, pageTitles }) => {
                     <img
                       key={image.key}
                       data-src={image.src}
-                      onClick={() => showImage(image.src)}
+                      onClick={() =>
+                        showImage(
+                          image.src,
+                          imgs.map((i) => i.src)
+                        )
+                      }
                       // onClick={() => window.open(image.src, "_blank").focus()}
                     />
                   );
@@ -211,7 +226,11 @@ const Blog = ({ blogPosts, pageTitles }) => {
       <Navigation pageTitles={pageTitles} />
       <div className={classes.wrapper}>{pageRender}</div>
       {showFullImage && (
-        <ImageFull url={imageUrl} close={() => setShowFullImage(false)} />
+        <ImageFull
+          url={imageUrl}
+          close={() => setShowFullImage(false)}
+          changeImage={changeImage}
+        />
       )}
     </>
   );
