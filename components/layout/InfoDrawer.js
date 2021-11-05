@@ -15,7 +15,7 @@ const infoDrawer = ({ filter, changed }) => {
             loading="lazy"
           ></iframe>
           <address>
-            AtelierGalerie de Garage
+            Ateliergalerie de Garage
             <br />
             Elemert 16
             <br />

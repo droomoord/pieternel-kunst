@@ -63,7 +63,8 @@ body {
 }
 
 .block-content img {
-  width: 100%;
+  display: block;
+  margin: 1em auto;
 }
 
 a {
