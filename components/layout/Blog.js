@@ -159,9 +159,7 @@ const Blog = ({ blogPosts, pageTitles }) => {
               data-id={index}
               className={`post ${classes.post}`}
             >
-              <h1 className={classes.title}>
-                {post.title.charAt(0).toUpperCase() + post.title.slice(1)}
-              </h1>
+              <h1 className={classes.title}>{post.title}</h1>
               <div className={classes.date}>
                 {post.van ? (
                   <span>
@@ -211,6 +209,7 @@ const Blog = ({ blogPosts, pageTitles }) => {
                   );
                 })}
               </div>
+              <hr style={{ marginBottom: "1em" }} />
             </div>
           );
         })}

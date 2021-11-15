@@ -4,7 +4,10 @@ import Filter from "../Filter/Filter";
 const infoDrawer = ({ filter, changed }) => {
   return (
     <div className={classes.wrapper}>
-      <div className={classes.wrapper2}>
+      <div
+        className={classes.wrapper2}
+        style={filter ? { top: "100px" } : null}
+      >
         {filter && <Filter changed={changed} />}
 
         <div className={classes.locatie}>
